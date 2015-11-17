@@ -1,0 +1,11 @@
+---
+- hosts: all
+  sudo: yes
+
+  vars:
+    target_user: vagrant
+    home_dir: "/home/{{ target_user }}"
+
+  roles:
+    - common
+    - web

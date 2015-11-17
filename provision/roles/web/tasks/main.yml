@@ -1,0 +1,13 @@
+---
+- name: RPM
+  yum: pkg={{ item }} state=latest
+  with_items:
+    - haproxy
+
+- name: Enable service
+  service: name={{ item }} state=started enabled=yes
+  with_items:
+    - haproxy
+
+- name: Haproxy config
+  template: backup=yes dest=/etc/haproxy/haproxy.cfg src=haproxy.cfg.j2

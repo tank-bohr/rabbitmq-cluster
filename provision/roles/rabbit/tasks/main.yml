@@ -1,0 +1,13 @@
+---
+- name: RPM
+  yum: pkg={{ item }} state=latest
+  with_items:
+    - rabbitmq-server
+
+- name: Enable service
+  service: name={{ item }} state=started enabled=yes
+  with_items:
+    - rabbitmq-server
+
+- name: Enable RabbitMQ management plugin
+  rabbitmq_plugin: names=rabbitmq_management state=enabled

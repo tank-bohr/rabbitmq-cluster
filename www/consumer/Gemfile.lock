@@ -1,0 +1,19 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    amq-protocol (2.0.0)
+    bunny (2.2.1)
+      amq-protocol (>= 2.0.0)
+    serverengine (1.5.11)
+      sigdump (~> 0.2.2)
+    sigdump (0.2.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  bunny
+  serverengine
+
+BUNDLED WITH
+   1.10.6

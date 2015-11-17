@@ -1,0 +1,45 @@
+---
+- name: Create /var/www
+  file: path=/var/www state=directory owner={{ target_user }}
+
+# - name: Enable NFS
+#   service: name={{ item }} state=started enabled=yes
+#   with_items:
+#     - rpcbind
+#     - nfs-server
+#     - nfs-lock
+#     - nfs-idmap
+
+- name: Usefull stuff
+  yum: pkg={{ item }} state=latest
+  with_items:
+    - mc
+    - gcc
+    - git
+    - vim
+    - wget
+    - telnet
+    - nmap-ncat
+    - epel-release
+
+- name: add rpm repo for ruby
+  get_url:
+    url: http://download.opensuse.org/repositories/home:tank_bohr/CentOS_7/home:tank_bohr.repo
+    dest: /etc/yum.repos.d
+
+- name: install ruby
+  yum: name=ruby state=latest
+
+- name: set PATH to use ruby
+  lineinfile:
+    dest: "{{home_dir}}/.bashrc"
+    line: export PATH=/opt/ruby-2.2.3/bin:$HOME/.gem/ruby/2.2.0/bin:$PATH
+    state: present
+
+- name: gemrc
+  lineinfile:
+    dest: "{{home_dir}}/.gemrc"
+    line: "gem: --no-document --user-install"
+    state: present
+    owner: "{{ target_user }}"
+    create: yes
