@@ -19,7 +19,7 @@ class BunnyPusher
   def initialize
     establish_connection if connection.nil?
   rescue Bunny::TCPConnectionFailed
-    puts "Couldn't conntect to rabbitmq"
+    puts "Couldn't connect to rabbitmq"
   end
 
   def publish(data, options)
